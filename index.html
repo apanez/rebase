@@ -1,0 +1,97 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style type="text/css">
+		.team {
+			padding: 6px 10px;
+			border-radius: 3px;
+			border: 1px solid #ccc;
+			margin: 20px auto;
+			width: 500px;
+		}
+
+		.team_head, .team_body, .team_foot {
+			overflow: hidden;
+			margin: 5px 0;
+		}
+
+		.team_body img {
+			width: 100px;
+		}
+
+		.team_foot {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<template id="jugadores">
+		<tr>
+			<td>{{ partidos }} | <button type="button" @click="cargaJugadores()"> ok </td>
+		</tr>
+		<!-- <tr v-for="partido in partidos">
+			<td style="width: 33.33%" class="text-center">{{ partido.fecha }}</td>
+			<td style="width: 33.33%" class="text-center">{{ partido.rival }}</td>
+			<td style="width: 33.33%" class="text-center">{{ partido.sede }}</td>
+		</tr> -->
+	</template>
+	<div id="app" >
+		<div class="team">
+			<div class="team_head">
+				<h4 class="pull-left">{{ nombre }}</h4>
+				<span class="pull-right">{{ fundacion }}</span>
+			</div>
+			<hr>
+			<div class="team_body">
+				<ul class="pull-left">
+					<li v-for="jugador in jugadores">
+						{{ jugador.nombre }}
+					</li>
+				</ul>
+				<img v-bind:src="escudo" class="pull-right">
+			</div>
+			<hr>
+			<div class="team_foot">
+				<table cellpadding="0" cellspacing="0" border="0" width="100%">
+					<jugadores></jugadores>
+				</table>
+			</div>
+		</div>
+		<pre>{{ $data | json }}</pre>
+	</div>
+	<script type="text/javascript">
+		var data;
+
+		Vue.component('jugadores', {
+			template: '#jugadores',
+			ready: function() {
+				// this.cargaJugadores;
+			},
+			data: function() {
+				return [
+					{partidos: 'equipo'}
+				]
+			},
+			methods: {
+				cargaJugadores: function() {
+					$.get('http://demo9212089.mockable.io/futbol', function(json) {
+						// for (var i = 0; i < json.length; i++) {
+							// console.log(json[i]);
+							console.log(this.partidos);
+						// }
+					});
+				}
+			}
+		});
+
+		new Vue({
+			el: '#app',
+			data: [
+				'nombre':'Angelo'
+			]
+		});
+	</script>
+	
+</body>
+</html>
