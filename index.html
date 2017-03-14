@@ -23,9 +23,13 @@
 		.team_foot {
 			text-align: center;
 		}
+		.speak {
+			speak: spell-out;
+		}
 	</style>
 </head>
 <body>
+	<div class="speak">Prueba para propiedad speak.</div>
 	<template id="jugadores">
 		<tr>
 			<td>{{ partidos }} | <button type="button" @click="cargaJugadores()"> ok </td>
@@ -92,6 +96,6 @@
 			]
 		});
 	</script>
-	
+
 </body>
 </html>
